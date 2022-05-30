@@ -2,6 +2,9 @@
 
 ## 📝 Notes
 
+- useFetcher.Form vs <Form replace /> is the that <Form replace /> clears the history forward
+
+
 ## 🤓 Background
 
 From the beginning of the web, `<form>` has been how mutations were handled. The user fills out some fields, clicks the submit button, and the browser serializes that form and sends it to the server. The server processes the form and returns a response (normally a redirect to another page). Thanks to modern advancements in JavaScript, we're able to offer a better user experience that doesn't involve a full-page refresh, but the mental model of a form with Remix is still the same. Form submissions are navigations by default.

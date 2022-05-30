@@ -4,6 +4,7 @@ import type {
   MetaFunction,
 } from "@remix-run/node";
 import { json } from "@remix-run/node";
+import { useFetcher } from "@remix-run/react";
 import type { ShouldReloadFunction } from "@remix-run/react";
 import {
   Links,
@@ -67,18 +68,17 @@ export default function App() {
 function LogoutTimer() {
   const [status, setStatus] = useState<"idle" | "show-modal">("idle");
   const location = useLocation();
-  // 💿 add the useFetcher hook here so you can trigger a logout
+  const fetcher = useFetcher();
 
-  const logoutTime = 1000 * 60 * 60 * 24;
-  const modalTime = logoutTime - 1000 * 60 * 2;
-  // 💰 you can swap the logoutTime and modalTime with these to test this more easily:
-  // const logoutTime = 5000;
-  // const modalTime = 2000;
+  // const logoutTime = 1000 * 60 * 60 * 24;
+  // const modalTime = logoutTime - 1000 * 60 * 2;
+  const logoutTime = 5000;
+  const modalTime = 2000;
   const modalTimer = useRef<ReturnType<typeof setTimeout>>();
   const logoutTimer = useRef<ReturnType<typeof setTimeout>>();
 
   const logout = useCallback(() => {
-    // 💿 log the user out by posting the /logout
+    fetcher.submit({ redirectTo: "/" }, { method: "post", action: "/logout" });
   }, []);
 
   const cleanupTimers = useCallback(() => {

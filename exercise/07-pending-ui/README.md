@@ -2,6 +2,8 @@
 
 ## 📝 Notes
 
+- you can do spin delay with CSS BUT it cannot wait after its showed 200ms
+
 ## 🤓 Background
 
 No matter how hard you try, you can't control your user's network and sometimes that's gonna be slow. Without JavaScript, the browser will show a spinner in favicon to give the user some feedback that stuff's going on. But once we start making fetch requests, the browser doesn't give the user any feedback.

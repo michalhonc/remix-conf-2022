@@ -2,6 +2,11 @@
 
 ## 📝 Notes
 
+- multiple optimistic updates -> use custom state for that
+- check when do you reset the form
+- 
+- otpimistic update for single thing in multiple places -> abstract that fetching/optimistic logic (useFetchers)
+
 ## 🤓 Background
 
 Continuing with the twitter example in the last exercise, when you click "favorite" on a tweet, it shows the filled-in red heart instantly. Even if you're on a slow connection. How do they manage to do that? Well, it's a trick! The tweet hasn't _actually_ been favorited yet! They're just being... optimistic! Turns out 99% of the time when you favorite a tweet, it's successful. So they just decided that they'll show you the finished state before it's actually finished.

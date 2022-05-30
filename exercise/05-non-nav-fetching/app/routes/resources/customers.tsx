@@ -1,25 +1,30 @@
+import { json } from "@remix-run/node";
+import { useFetcher } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/node";
 import clsx from "clsx";
 import { useCombobox } from "downshift";
 import { useState } from "react";
 import { LabelText } from "~/components";
+import { requireUser } from "~/session.server";
+import { searchCustomers } from "~/models/customer.server";
 
-export const loader: LoaderFunction = async () => {
-  // 💿 verify the user is logged in with requireUser
+export const loader: LoaderFunction = async ({ request }) => {
+	requireUser(request)
 
-  // 💿 perform the customer search with searchCustomers and the query from the request
-  // and send back a json response
+	const url = new URL(request.url)
 
-  // 💣 and... delete this
-  throw new Error("Not implemented");
+	const search = await searchCustomers(url.searchParams.get('q') || '')
+
+	return json(search)
 };
 
 type Customer = { id: string; name: string; email: string };
 
 export function CustomerCombobox({ error }: { error?: string | null }) {
-  // 💿 use the useFetcher hook to fetch the customers
+	const fetcher = useFetcher()
 
-  // 💯 the combobox needs to have a unique but consistent ID, so swap this for useId from React
+	console.log('CustomerCombobox fetcher', fetcher)
+
   const id = "customer-combobox";
 
   // 💿 set this to the customer data you get from the fetcher (if it exists)
@@ -36,11 +41,7 @@ export function CustomerCombobox({ error }: { error?: string | null }) {
     items: customers,
     itemToString: (item) => (item ? item.name : ""),
     onInputValueChange: (changes) => {
-      // 💿 use your fetcher to submit the query and get back the customers
-      // 💰 changes.inputValue is the query
-      // 💰 what method do we need to set this to so it ends up in the loader?
-      // 💰 what should the action URL be set to so the request is always sent to
-      // this route module regardless of where this component is used?
+			fetcher.submit({ q: changes.inputValue }, { action: "/resources/customers" });
     },
   });
 

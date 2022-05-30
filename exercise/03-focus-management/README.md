@@ -2,6 +2,9 @@
 
 ## 📝 Notes
 
+- Why to focus inital input when focused on the button? - we can reset the form for user when he starts editing other input
+- Relay more on location state than application state
+
 ## 🤓 Background
 
 One of the benefits of having JavaScript on the page is we're able to help the user navigate around the app more intelligently. Without JavaScript, their focus always goes to `<body>` any time they click a link or submit a form. With JavaScript, their focus stays where it was (assuming that element remains on the page post-transition... otherwise it _does_ go to the `<body>`). But even this is often not the most intelligent thing to do for the user. We can do better.

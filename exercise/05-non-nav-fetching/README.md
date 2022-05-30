@@ -2,6 +2,9 @@
 
 ## 📝 Notes
 
+- fetcher.submit vs fetcher.load -> it's essentially the same but load is for single fetcher and submit is more robust
+- resource routes are not 100% verified as best practice
+
 ## 🤓 Background
 
 Picture this: a React component that handles the whole experience of fetching data from a server... _including the server code_. That's what we're going to do here. There are tons of use cases for this, but one really common one is a combobox which allows you to select from a list of options. It's too expensive to send all those options to the client though (maybe you're building the twitter `@`-mention autocomplete for example), so you have to load those possible values as the user is typing. That's where this becomes really complicated... Unless you're using Remix 😉.

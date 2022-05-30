@@ -6,6 +6,7 @@ import {
   useLoaderData,
   useLocation,
   useParams,
+  useFetcher,
 } from "@remix-run/react";
 import { inputClasses, LabelText, submitButtonClasses } from "~/components";
 import { getInvoiceDetails } from "~/models/invoice.server";
@@ -174,7 +175,8 @@ export default function InvoiceRoute() {
 
 function Deposits() {
   const data = useLoaderData() as LoaderData;
-  // 💿 call useFetcher here to get the fetcher for the form
+  const fetcher = useFetcher();
+  console.log({ state: fetcher.state })
 
   return (
     <div>
@@ -195,7 +197,7 @@ function Deposits() {
         <div>None yet</div>
       )}
       {/* 💿 change this to your fetcher.Form */}
-      <form
+      <fetcher.Form
         method="post"
         className="grid grid-cols-1 gap-x-4 gap-y-2 lg:grid-cols-2"
       >
@@ -252,7 +254,7 @@ function Deposits() {
             </button>
           </div>
         </div>
-      </form>
+      </fetcher.Form>
     </div>
   );
 }
